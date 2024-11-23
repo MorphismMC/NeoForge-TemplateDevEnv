@@ -21,6 +21,11 @@ neoForge {
         client {
             client()
 
+            if (isJetBrainsRuntime()) {
+                jvmArgument '-XX:+AllowEnhancedClassRedefinition'
+                jvmArgument '-XX:HotswapAgent=fatjar'
+            }
+
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
@@ -74,4 +79,8 @@ neoForge {
             sourceSet(sourceSets.main)
         }
     }
+}
+
+static def isJetBrainsRuntime() {
+    return System.getProperty('java.vm.vendor').contains('JetBrains')
 }
