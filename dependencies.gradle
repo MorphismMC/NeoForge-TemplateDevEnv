@@ -20,6 +20,6 @@ dependencies {
 
     // Mixin (& Extras)
     api annotationProcessor("io.github.llamalad7:mixinextras-common:${this.forge.versions.mixinextras.get()}")
-    jarJar("io.github.llamalad7:mixinextras-forge:${this.forge.versions.mixinextras.get()}")
+    jarJar "io.github.llamalad7:mixinextras-forge:${this.forge.versions.mixinextras.get()}"
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 }

@@ -36,7 +36,6 @@ dependencyResolutionManagement {
         // Libs
         def quiltMappingsVersion = "5"  // https://lambdaurora.dev/tools/import_quilt.html
         def parchmentVersion = "2023.09.03" // https://parchmentmc.org/docs/getting-started
-        def shadowVersion = "7.1.2"
         def modDevGradleVersion = "2.0.61-beta-pr-118-legacy"
         def macheteVersion = "1.+"
         def mixinextrasVersion = "0.2.0"
@@ -73,9 +72,6 @@ dependencyResolutionManagement {
 
             def minecraft = version("minecraft", minecraftVersion)
             library("minecraft", "com.mojang", "minecraft").versionRef(minecraft)
-
-            def shadow = version("shadow", shadowVersion)
-            plugin("shadow", "com.github.johnrengelman.shadow").versionRef(shadow)
 
             def modDevGradle = version("modDevGradleLegacy", modDevGradleVersion)
             plugin("modDevGradle", "net.neoforged.moddev.legacy").versionRef(modDevGradle)
