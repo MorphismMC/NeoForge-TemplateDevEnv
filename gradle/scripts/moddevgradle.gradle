@@ -21,7 +21,7 @@ neoForge {
         client {
             client()
 
-            if (isJetBrainsRuntime()) {
+            if (System.getProperty('java.vm.vendor').contains('JetBrains')) {
                 jvmArgument '-XX:+AllowEnhancedClassRedefinition'
                 jvmArgument '-XX:HotswapAgent=fatjar'
             }
@@ -79,8 +79,4 @@ neoForge {
             sourceSet(sourceSets.main)
         }
     }
-}
-
-static def isJetBrainsRuntime() {
-    return System.getProperty('java.vm.vendor').contains('JetBrains')
 }
