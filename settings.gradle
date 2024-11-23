@@ -85,3 +85,4 @@ dependencyResolutionManagement {
     }
 }
 
+rootProject.name = mod_id
