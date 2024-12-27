@@ -1,16 +1,6 @@
 pluginManagement {
     repositories {
         maven { url = "https://maven.minecraftforge.net/" }
-        maven {
-            name 'Maven for PR #118' // https://github.com/neoforged/ModDevGradle/pull/118
-            url 'https://prmaven.neoforged.net/ModDevGradle/pr118'
-            content {
-                includeModule('net.neoforged.moddev.legacy', 'net.neoforged.moddev.legacy.gradle.plugin')
-                includeModule('net.neoforged.moddev', 'net.neoforged.moddev.gradle.plugin')
-                includeModule('net.neoforged.moddev.repositories', 'net.neoforged.moddev.repositories.gradle.plugin')
-                includeModule('net.neoforged', 'moddev-gradle')
-            }
-        }
         gradlePluginPortal()
     }
 }
@@ -20,23 +10,19 @@ dependencyResolutionManagement {
         mavenCentral()
     }
     versionCatalogs {
-        // Minecraft Version
         def minecraftVersion = "1.20.1"
 
-        // Mod Dependencies Versions
-        // Common
+        // Mod Dependencies
         def jeiVersion = "15.20.0.105"
         def reiVersion = "12.1.785"
         def emiVersion = "1.1.13"
-
-        // Forge
         def forgeVersion = "47.1.47"
         def jadeForgeVersion = "11.6.3"
 
         // Libs
         def quiltMappingsVersion = "5"  // https://lambdaurora.dev/tools/import_quilt.html
         def parchmentVersion = "2023.09.03" // https://parchmentmc.org/docs/getting-started
-        def modDevGradleVersion = "2.0.61-beta-pr-118-legacy"
+        def modDevGradleVersion = "2.0.52-beta"
         def macheteVersion = "1.+"
         def mixinextrasVersion = "0.2.0"
         def lombokPluginVersion = "8.7.1"
@@ -74,7 +60,7 @@ dependencyResolutionManagement {
             library("minecraft", "com.mojang", "minecraft").versionRef(minecraft)
 
             def modDevGradle = version("modDevGradleLegacy", modDevGradleVersion)
-            plugin("modDevGradle", "net.neoforged.moddev.legacy").versionRef(modDevGradle)
+            plugin("modDevGradle", "net.neoforged.moddev.legacyforge").versionRef(modDevGradle)
 
             def machete = version("machete", macheteVersion)
             plugin("machete", "io.github.p03w.machete").versionRef(machete)
