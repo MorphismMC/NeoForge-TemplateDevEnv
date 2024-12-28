@@ -13,7 +13,8 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers = ['src/main/resources/META-INF/accesstransformer.cfg']
+    validateAccessTransformers = true
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
