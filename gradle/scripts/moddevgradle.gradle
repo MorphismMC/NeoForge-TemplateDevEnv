@@ -4,17 +4,16 @@ mixin {
 }
 
 neoForge {
-    // Specify the version of NeoForge to use.
-    version = forge.versions.minecraftForge.get()
+    // Specify the version of Forge to use.
+    version = "${minecraft_version}-${forge_version}"
 
     parchment {
-        minecraftVersion = libs.versions.minecraft.get()
-        mappingsVersion = libs.versions.parchment.get()
+        minecraftVersion = parchment_minecraft_version
+        mappingsVersion = parchment_mappings_version
     }
 
     // This line is optional. Access Transformers are automatically detected
     accessTransformers = ['src/main/resources/META-INF/accesstransformer.cfg']
-    validateAccessTransformers = true
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -29,9 +28,6 @@ neoForge {
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-            if (use_render_doc) {
-                systemProperty 'dev.renderDocPath', "${render_doc_path}\\renderdoc.dll"
-            }
         }
 
         server {

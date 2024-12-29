@@ -1,21 +1,17 @@
 plugins {
-    id 'java-library'
-    id 'eclipse'
     id 'idea'
+    id 'java-library'
     id 'maven-publish'
-    alias libs.plugins.modDevGradle
+    alias libs.plugins.modDevGradleLegacy
     alias libs.plugins.machete // automatic jar compressing on build
     alias libs.plugins.lombok
 }
 
 group = mod_group_id
+version = mod_version
 
 // ModDevGradle requires Java21, but we need to compile with Java17 to maintain compatibility
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-// Formats the mod version to include the loader, Minecraft version, build number (if present), and '-SNAPSHOT-<timestamp>' if enabled.
-boolean isSnapshot = System.getenv("SNAPSHOT")
-version = "${mod_version}" + (isSnapshot ? "-SNAPSHOT" : "")
 
 apply from: "$rootDir/gradle/scripts/moddevgradle.gradle"
 apply from: "$rootDir/gradle/scripts/repositories.gradle"
@@ -45,29 +41,5 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
-    }
-}
-
-if (use_render_doc) {
-    tasks.register("runWithRenderDoc", Exec) {
-        def javaExecTask = tasks.withType(JavaExec).named("runClient").get()
-        def javaHome = javaExecTask.javaLauncher.get().metadata.installationPath.asFile.absolutePath
-        commandLine = [
-                "${render_doc_path}\\renderdoccmd.exe",
-                "capture",
-                "--opt-hook-children",
-                "--wait-for-exit",
-                "--working-dir",
-                ".",
-                "$javaHome/bin/java.exe",
-                "-Xmx64m",
-                "-Xms64m",
-                "-Dorg.gradle.appname=gradlew",
-                "-Dorg.gradle.java.home=$javaHome",
-                "-classpath",
-                "gradle/wrapper/gradle-wrapper.jar",
-                "org.gradle.wrapper.GradleWrapperMain",
-                "runClient"
-        ]
     }
 }
