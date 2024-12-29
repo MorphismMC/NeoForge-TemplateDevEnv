@@ -1,15 +1,10 @@
-mixin {
-//    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}.mixins.json"
-}
-
 neoForge {
     // Specify the version of NeoForge to use.
-    version = forge.versions.minecraftForge.get()
+    version = neo_version
 
     parchment {
-        minecraftVersion = libs.versions.minecraft.get()
-        mappingsVersion = libs.versions.parchment.get()
+        minecraftVersion = parchment_minecraft_version
+        mappingsVersion = parchment_mappings_version
     }
 
     // This line is optional. Access Transformers are automatically detected
@@ -70,7 +65,7 @@ neoForge {
             // Recommended logging level for the console
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            logLevel = org.slf4j.event.Level.INFO
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
 

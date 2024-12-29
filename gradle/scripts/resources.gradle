@@ -7,26 +7,18 @@ task printVersion {
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
-    var forgeVers = forge.versions.forgeShortVersion.get().split("\\.")[0]
     var replaceProperties = [
-            version                 : version,
-            mod_id                  : mod_id,
-            minecraft_version       : libs.versions.minecraft.get(),
-            minecraft_version_range : minecraft_version_range,
-            loader_version          : forgeVers,
-            loader_version_range    : loader_version_range,
-            forge_version           : forgeVers, // only specify major version of forge
-            forge_version_range     : forge_version_range,
-            jei_version             : forge.versions.jei.get(),
-            emi_version             : forge.versions.emi.get(),
-            jade_version            : forge.versions.jade.get(),
-            mod_license             : mod_license,
-            mod_name                : mod_name,
-            mod_description         : mod_description,
-            mod_authors             : mod_authors,
-            pack_format_number      : pack_format_number
-//            mod_url             : mod_url,
-//            mod_issue_tracker   : mod_issue_tracker
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
     ]
     inputs.properties replaceProperties
     expand replaceProperties

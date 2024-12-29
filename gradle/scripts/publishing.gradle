@@ -1,9 +1,10 @@
-artifacts {
-    archives tasks.reobfJar
-    archives tasks.reobfSlimJar
-    archives tasks.sourcesJar
-}
+//artifacts {
+//    archives tasks.reobfJar
+//    archives tasks.reobfSlimJar
+//    archives tasks.sourcesJar
+//}
 
+// Example configuration to allow publishing using the maven-publish plugin
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -15,17 +16,16 @@ publishing {
 
             artifact sourcesJar
         }
+//        register('mavenJava', MavenPublication) {
+//            from components.java
+//        }
     }
 
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-//    repositories {
-//        // Add repositories to publish to here.
-//        maven {
-//            url
-//            credentials {
-//                username System.getenv("MAVEN_USER")
-//                password System.getenv("MAVEN_PASSWORD")
-//            }
-//        }
-//    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
 }
+

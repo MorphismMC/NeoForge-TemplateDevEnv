@@ -1,72 +1,50 @@
 pluginManagement {
     repositories {
-        maven { url = "https://maven.minecraftforge.net/" }
+        mavenLocal()
         gradlePluginPortal()
+        maven { url = "https://maven.neoforged.net/releases" }
     }
 }
 
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
 dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-    }
     versionCatalogs {
-        def minecraftVersion = "1.20.1"
-
         // Mod Dependencies
-        def jeiVersion = "15.20.0.105"
-        def reiVersion = "12.1.785"
-        def emiVersion = "1.1.13"
-        def forgeVersion = "47.1.47"
-        def jadeForgeVersion = "11.6.3"
+        mods {
+            version("jei", "19.9.1.125")
+            version("rei", "16.0.788")
+            version("emi", "1.1.18+${minecraft_version}")
+            version("jade", "15.8.3+neoforge")
 
-        // Libs
-        def quiltMappingsVersion = "5"  // https://lambdaurora.dev/tools/import_quilt.html
-        def parchmentVersion = "2023.09.03" // https://parchmentmc.org/docs/getting-started
-        def modDevGradleVersion = "2.0.52-beta"
-        def macheteVersion = "1.+"
-        def mixinextrasVersion = "0.2.0"
-        def lombokPluginVersion = "8.7.1"
+            library("jei-common-api", "mezz.jei", "jei-${minecraft_version}-common-api").versionRef("jei")
+            library("jei-neoforge-api", "mezz.jei", "jei-${minecraft_version}-neoforge-api").versionRef("jei")
+            library("jei-neoforge-impl", "mezz.jei", "jei-${minecraft_version}-neoforge").versionRef("jei")
 
-        forge {
-            version("forgeShortVersion", forgeVersion)
-            def minecraftForge = version("minecraftForge", "${minecraftVersion}-${forgeVersion}")
-            library("minecraftForge", "net.minecraftforge", "forge").versionRef(minecraftForge)
+            library("rei-plugin", "me.shedaniel", "RoughlyEnoughItems-default-plugin-neoforge").versionRef("rei")
+            library("rei-api", "me.shedaniel", "RoughlyEnoughItems-api-neoforge").versionRef("rei")
+            library("rei-neoforge", "me.shedaniel", "RoughlyEnoughItems-neoforge").versionRef("rei")
 
-            def jei = version("jei", jeiVersion)
-            library("jei-common-api", "mezz.jei", "jei-${minecraftVersion}-common-api").versionRef(jei)
-            library("jei-forge-api", "mezz.jei", "jei-${minecraftVersion}-forge-api").versionRef(jei)
-            library("jei-forge-impl", "mezz.jei", "jei-${minecraftVersion}-forge").versionRef(jei)
-
-            def rei = version("rei", reiVersion)
-            library("rei-plugin", "me.shedaniel", "RoughlyEnoughItems-default-plugin-forge").versionRef(rei)
-            library("rei-api", "me.shedaniel", "RoughlyEnoughItems-api-forge").versionRef(rei)
-            library("rei-forge", "me.shedaniel", "RoughlyEnoughItems-forge").versionRef(rei)
-
-            def emi = version("emi", emiVersion + "+" + minecraftVersion)
-            library("emi", "dev.emi", "emi-forge").versionRef(emi)
-
-            def jade = version("jade", jadeForgeVersion)
-            library("jade", "maven.modrinth", "jade").versionRef(jade)
-
-            def mixinextras = version("mixinextras", mixinextrasVersion)
-            library("mixinextras-forge", "io.github.llamalad7", "mixinextras-forge").versionRef(mixinextras)
+            library("emi", "dev.emi", "emi-neoforge").versionRef("emi")
+            library("jade", "maven.modrinth", "jade").versionRef("jade")
         }
 
         libs {
-            version("quiltMappings", quiltMappingsVersion)
-            version("parchment", parchmentVersion)
+            version("modDevGradle", "1.0.21")
+            version("machete", "2.0.1")
+            version("lombok", "8.7.1")
+            version("foojay", "0.8.0")
 
-            def minecraft = version("minecraft", minecraftVersion)
-            library("minecraft", "com.mojang", "minecraft").versionRef(minecraft)
+            version("jetbrains-annotations", "24.1.0")
 
-            def modDevGradle = version("modDevGradleLegacy", modDevGradleVersion)
-            plugin("modDevGradle", "net.neoforged.moddev.legacyforge").versionRef(modDevGradle)
+            plugin("modDevGradle", "net.neoforged.moddev").versionRef("modDevGradle")
+            plugin("machete", "io.github.p03w.machete").versionRef("machete")
+            plugin("lombok", "io.freefair.lombok").versionRef("lombok")
+            plugin("foojay", 'org.gradle.toolchains.foojay-resolver-convention').versionRef("foojay")
 
-            def machete = version("machete", macheteVersion)
-            plugin("machete", "io.github.p03w.machete").versionRef(machete)
-
-            def lombok = version("lombok", lombokPluginVersion)
-            plugin("lombok", "io.freefair.lombok").versionRef(lombok)
+            library("jetbrains-annotations", "org.jetbrains", "annotations").versionRef("jetbrains-annotations")
         }
     }
 }

@@ -3,11 +3,11 @@ tasks.register('slimJar', Jar) {
     from sourceSets.main.output
 }
 
-obfuscation {
-    reobfuscate(tasks.named('slimJar'), sourceSets.main) {
-        archiveClassifier = "slim"
-    }
-}
+//obfuscation {
+//    reobfuscate(tasks.named('slimJar'), sourceSets.main) {
+//        archiveClassifier = "slim"
+//    }
+//}
 
 tasks.register('sourcesJar', Jar) {
     from delombok.outputs.files
@@ -16,19 +16,5 @@ tasks.register('sourcesJar', Jar) {
 }
 
 base {
-    archivesName = "${project.name}-${libs.versions.minecraft.get()}"
-}
-
-afterEvaluate {
-    tasks.withType(org.gradle.jvm.tasks.Jar).configureEach {
-        manifest.attributes([
-                'MixinConfigs': "${mod_id}.mixins.json",
-                'Specification-Title': project.name,
-                'Specification-Version': mod_version,
-//                'Specification-Vendor': ,
-                'Implementation-Title': base.archivesName,
-                'Implementation-Version': version,
-//                'Implementation-Vendor': ,
-        ])
-    }
+    archivesName = "${mod_id}-${minecraft_version}"
 }
